@@ -9,6 +9,6 @@ public class Wrap implements TimsConsumables{
         return 4.5;
     }
     public String toString(){
-        return "Item: " + "Price: " + getPrice();
+        return "Item: Wrap" + "Price: " + getPrice();
     }
 }

@@ -9,6 +9,6 @@ public class GiftCards implements TimsMerchandise{
         return "A 100 dollar gift card";
     }
     public String toString(){
-        return "Item: gift card" + "Price: " + getPrice();
+        return "Item: Gift card" + "Price: " + getPrice();
     }
 }
