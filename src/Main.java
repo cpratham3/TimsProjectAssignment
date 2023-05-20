@@ -140,8 +140,12 @@ public class Main {
         TimsItems[] itemlist = new TimsItems[100];
         int orderCounter = 0;
         int choice =0;
+        String option;
         double total_price=0;
         boolean cond=true;
+        int moneyinwallet = 10;
+        final long walletAccessNumber = 12345678;
+        long userWalletInput = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("WELCOME TO TIM HORTONS PLEASE SELECT FROM THE MENU");
 
@@ -253,17 +257,56 @@ public class Main {
 
 //                    break;
                 case 3:
-                    System.out.println("*******************Order Summary*************************");
+                    System.out.println("*******************Cart Details***************************");
                     for (int i = 0; i < orderCounter; i++) {
                         System.out.println(itemlist[i]);
                     }
                     System.out.println("Your Total amount due: "+total_price);
+                    System.out.println("**********************************************************");
                     break;
                 case 4:
-
+                    System.out.println("*******************Order Summary*************************");
                     System.out.println("Your Order total: "+total_price);
-                    System.out.println("Amount paid: "+total_price);
-                    System.out.println("Thank You for ordering!");
+                    System.out.println("Please Input 1 to use your wallet otherwise 2 to autopay");
+                    choice = sc.nextInt();
+                    if(choice==1){
+                        System.out.println("Enter the Wallet Access number");
+                        userWalletInput = sc.nextLong();
+                        if(userWalletInput==walletAccessNumber){
+                            System.out.println("Current Balance :"+ moneyinwallet);
+                            System.out.println("Amount Due :"+ total_price);
+                            System.out.println(" Please press 1 to pay using wallet money");
+                            choice = sc.nextInt();
+                            if(choice==1 && moneyinwallet-total_price>0){
+                                moneyinwallet= (int) (moneyinwallet-total_price);
+                                System.out.println("TRANSACTION SUCCESSFUL, new wallet balance :"+moneyinwallet);
+                                System.out.println("Amount paid: "+total_price);
+                                System.out.println("Thank You for ordering!");
+                                System.out.println("**********************************************************");
+                            }
+                            else if(moneyinwallet-total_price<0) {
+                                System.out.println("Insufficient funds, Order cancelled");
+                            }
+                            else {
+                                System.out.println("Input invalid,Order cancelled");
+                            }
+                        }
+                        else{
+                            System.out.println("WRONG ACCESS NUMBER,Order Cancelled");
+                        }
+                        }
+                    else if(choice==2){
+                        System.out.println("Thank You AUTOPAYMENT");
+                        System.out.println("Amount paid: "+total_price);
+                        System.out.println("Thank You for ordering!");
+                        System.out.println("**********************************************************");
+                        cond=false;
+
+                    }
+
+//                    System.out.println("Amount paid: "+total_price);
+//                    System.out.println("Thank You for ordering!");
+//                    System.out.println("**********************************************************");
                     cond=false;
                     break;
 
